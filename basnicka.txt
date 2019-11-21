@@ -1,4 +1,5 @@
-Jak na Git
+Jak na Git - Ich
+
 Chci se naučit používat Git,
 jakpak se jen seznámit s příkazem commit?
 Uložit, přepsat, něco stvořit,
@@ -9,3 +10,5 @@ Už umím dělat revize
 těší mě to velice,
 procházet si statusy,
 logy, či další kentusy.
+
+Teď jsme jeden!
