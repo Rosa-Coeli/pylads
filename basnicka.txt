@@ -2,5 +2,5 @@ Git
 Chci se naučit používat Git,
 jakpak se jen seznámit s příkazem commit?
 Uložit, přepsat, něco stvořit,
-všechna tajemství Gitu probořit.
-Ten starý dědeček ze Soulu.
+všechna tajemství Gitu probořit,
+programy verzovat jao pán.
