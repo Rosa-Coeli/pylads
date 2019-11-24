@@ -9,6 +9,7 @@ for i in zaznamy:
     for j in i:
         if j.islower():
             spravne = False
+            # break
         opravene.append(j.capitalize())
     if spravne:
         spravne_zaznamy.append(" ".join(i))
