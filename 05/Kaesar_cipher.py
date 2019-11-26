@@ -8,7 +8,10 @@ def change_computing(change):
 
 
 def ciphering(text, function):
-    pass
+    ciphered = ""
+    for i in text:
+        ciphered += function[i]
+    return ciphered
 
 
 def main():
@@ -16,8 +19,8 @@ def main():
     text = input("Insert text you want to cipher: ")
     change = int(input("Specify number: "))
     function = change_computing(change)
-    #return ciphering(text, function)
-    print(function)
+    return print(ciphering(text, function))
+    #print(function)
 
 
 main()
