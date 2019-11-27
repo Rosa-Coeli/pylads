@@ -10,12 +10,14 @@ def change_computing(change):
 def ciphering(text, function):
     ciphered = ""
     for i in text:
+        if i not in function.keys():
+            function[i] = i 
         ciphered += function[i]
     return ciphered
 
 
 def main():
-    print("Hi, I will cipher your text with Caesar cipher")
+    print("Hi, I will cipher your text with Caesar cipher.\nIn case you wonder")
     text = input("Insert text you want to cipher: ")
     change = int(input("Specify number: "))
     function = change_computing(change)
