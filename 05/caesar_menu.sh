@@ -10,6 +10,7 @@ echo Type:
 echo -\'exit\', \'quit\' or \'x\' to exit.
 echo -\'help\' to show commands.
 echo -\'caesar\' to begin ciphering in Caesar\'s cipher.
+echo -\'morse '[<.> <_>]'\' to convert text to Morse code.
 }
 
 
@@ -28,6 +29,10 @@ do
 			;;
 		caesar | play)
 			py $dir_path/Kaesar_cipher.py
+			;;
+		morse*)
+			py $dir_path/Morse_code.py ${INPUT:5}
+			;;
 	esac
 	
 done
