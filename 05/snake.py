@@ -12,20 +12,20 @@ For counter-clockwise type 'cc'.\n""")
             elif starting_corner == '1':
                 return (-1, 0), ((0, 1), (-1, 0))
             elif starting_corner == '2':
-                return (0, -1), ((0, 1), (-1, 0))
-            elif starting_corner == '3':
                 return (1, 0), ((0, 1), (-1, 0))
+            elif starting_corner == '3':
+                return (0, -1), ((0, 1), (-1, 0))
         elif direction == "cc":
             if starting_corner == '0':
                 return (1, 0), ((0, -1), (1, 0))
             elif starting_corner == '1':
                 return (0, 1), ((0, -1), (1, 0))
             elif starting_corner == '2':
-                return (-1, 0), ((0, -1), (1, 0))
-            elif starting_corner == '3':
                 return (0, -1), ((0, -1), (1, 0))
+            elif starting_corner == '3':
+                return (-1, 0), ((0, -1), (1, 0))
         else:
-            print('Error: Invalid input.\nTry again:\n')
+            print('Error: Invalid input.\nTry again.')
 
 
 def starting_corner_set():
@@ -38,7 +38,7 @@ For bottom right corner write 3.\n""")
         if starting_corner == "0" or starting_corner == "1" or starting_corner == "2" or starting_corner == "3":
             return starting_corner
         else:
-            print('Error: Wrong input value.\nChose again:\n')
+            print('Error: Wrong input value.\nChose again.')
 
 
 def starting_corner_position(starting_corner, n):
@@ -72,41 +72,47 @@ def rounded_text(text, text_modulo):
 
 
 def add_character(text, text_counter, ciphered_list, direction, n, position):
-    print(position, ciphered_list)
     ciphered_list[position[0]][position[1]] = text[text_counter]
     text_counter += 1
     return ciphered_list, text_counter
 
 
-def snake_line(text, ciphered_list, turn_matrix, direction, n, position):
-    pass 
+def direction_change(turn_matrix, direction, position):
+    direction = (turn_matrix[0][0] * direction[0] + turn_matrix[0][1] * direction[1], 
+                turn_matrix[1][0] * direction[0] + turn_matrix[1][1] * direction[1])
+    position = position[0] + direction[0], position[1] + direction[1]
+    return direction, position
 
 
-def snake_line_const(text, text_counter, ciphered_list, turn_matrix, direction, n, position):
+def snake_line(text, text_counter, ciphered_list, direction, n, position):
     for i in range(n-1):
         ciphered_list, text_counter = add_character(text, text_counter, ciphered_list, direction, n, position)
         position = position[0] + direction[0], position[1] + direction[1]
     ciphered_list, text_counter = add_character(text, text_counter, ciphered_list, direction, n, position)
-    direction = (turn_matrix[0][0] * direction[0] + turn_matrix[0][1] * direction[1], 
-                turn_matrix[1][0] * direction[0] + turn_matrix[1][1] * direction[1])
-    position = position[0] + direction[0], position[1] + direction[1]
+    return ciphered_list, text_counter, position
+
+
+def snake_line_const(text, text_counter, ciphered_list, turn_matrix, direction, n, position):
+    ciphered_list, text_counter, position = snake_line(text, text_counter, ciphered_list, direction, n, position)
+    direction, position = direction_change(turn_matrix, direction, position)
     ciphered_list, text_counter = snake_line_sub(text, text_counter, ciphered_list, turn_matrix, direction, n, position)
     return ciphered_list, text_counter
 
 
 def snake_line_sub(text, text_counter, ciphered_list, turn_matrix, direction, n, position):
-    print(text, text_counter, ciphered_list, turn_matrix, direction, n, position)
-    for i in range(n-1):
+    ciphered_list, text_counter, position = snake_line(text, text_counter, ciphered_list, direction, n, position)
+    """for i in range(n-1):
         ciphered_list, text_counter = add_character(text, text_counter, ciphered_list, direction, n, position)
         position = position[0] + direction[0], position[1] + direction[1]
-    ciphered_list, text_counter = add_character(text, text_counter, ciphered_list, direction, n, position)
+    ciphered_list, text_counter = add_character(text, text_counter, ciphered_list, direction, n, position)"""
     if n == 1:
         return ciphered_list, text_counter
     else:
         n -= 1
-        direction = (turn_matrix[0][0] * direction[0] + turn_matrix[0][1] * direction[1], 
+        direction, position = direction_change(turn_matrix, direction, position)
+        """direction = (turn_matrix[0][0] * direction[0] + turn_matrix[0][1] * direction[1], 
                     turn_matrix[1][0] * direction[0] + turn_matrix[1][1] * direction[1])
-        position = position[0] + direction[0], position[1] + direction[1]
+        position = position[0] + direction[0], position[1] + direction[1]"""
         ciphered_list, text_counter = snake_line_const(text, text_counter, ciphered_list, turn_matrix, direction, n, position)
         return ciphered_list, text_counter
 
