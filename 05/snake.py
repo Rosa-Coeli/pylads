@@ -1,4 +1,16 @@
 from random import randint, choice
+from math import sqrt
+
+
+def round_text_length(text_length):
+    n = sqrt(text_length)
+    int_n = int(n)
+    if n != int_n:
+        int_n = int_n + 1
+        text_modulo = int_n**2 - text_length
+    else:
+        text_modulo = 0
+    return int_n, text_modulo 
 
 
 def outer_squares(n):
@@ -31,7 +43,6 @@ def direction_f(starting_corner):
 For counter-clockwise type 'cc'.\n""")
         if direction == "cw":
             if starting_corner == '0':
-                print(direction)
                 return (0, 1), ((0, 1), (-1, 0))
             elif starting_corner == '1':
                 return (-1, 0), ((0, 1), (-1, 0))
@@ -143,20 +154,17 @@ def snake_line_sub(text, text_counter, ciphered_list, turn_matrix, direction, n,
 
 def main():
     starting_corner = starting_corner_set()
-    print(starting_corner)
     direction, turn_matrix = direction_f(starting_corner)
     text = input('Insert the text you want to cipher:\n')
-    text_modulo = len(text) % 4
+    n, text_modulo = round_text_length(len(text))
     if  text_modulo != 0:
-        text = rounded_text(text, 4-text_modulo)
-    n = 2
+    text = rounded_text(text, text_modulo)
     n, added_text = outer_squares(n)
     starting_corner = starting_corner_position(starting_corner, n-1)
     text = added_text + text
-    ciphered_list = [["" for j in range(4)] for i in range(4)]
+    ciphered_list = [["" for j in range(n)] for i in range(n)]
     text_counter = 0
-    ciphered_list, text_counter = snake_line_sub(text, text_counter, ciphered_list, turn_matrix, direction, 4, starting_corner)
-    #snake_line(turn_matrix, direction, n, position)
+    ciphered_list, text_counter = snake_line_sub(text, text_counter, ciphered_list, turn_matrix, direction, n, starting_corner)
     for i in range(n):
         print(''.join(ciphered_list[i]))
 
