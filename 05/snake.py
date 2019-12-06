@@ -1,6 +1,30 @@
 from random import randint, choice
 
 
+def outer_squares(n):
+    new_squares = input('''If you wish additional squares of random letters around your
+text to further confuse anyone who might try to solve your cipher please tell me
+how many otherwise type just press 'Enter':\n''')
+    added_text = ''
+    if new_squares == added_text:
+        return n, added_text
+    exponent = len(new_squares) - 1
+    new_char = None
+    for i in new_squares:
+        print(i, int(i))
+        if ((i != "0") and (i != "1") and (i != "2") and (i != "3") and (i != "4")
+                and (i != "5") and (i != "6") and (i != "7") and (i != "8") and (i != "9")):
+            print('Error: Invalid input.')
+            n, added_text = outer_squares(n)
+            break
+        n += 2 * int(i) * 10**exponent
+        exponent -= 1
+        for j in range(4*(n-1)):
+            new_char = random_char(new_char)
+            added_text += new_char
+    return n, added_text
+
+
 def direction_f(starting_corner):
     while True:
         direction = input("""Set direction of the snake.\nFor clockwise type 'cw'.
@@ -125,8 +149,10 @@ def main():
     text_modulo = len(text) % 4
     if  text_modulo != 0:
         text = rounded_text(text, 4-text_modulo)
-    n = 4
+    n = 2
+    n, added_text = outer_squares(n)
     starting_corner = starting_corner_position(starting_corner, n-1)
+    text = added_text + text
     ciphered_list = [["" for j in range(4)] for i in range(4)]
     text_counter = 0
     ciphered_list, text_counter = snake_line_sub(text, text_counter, ciphered_list, turn_matrix, direction, 4, starting_corner)
