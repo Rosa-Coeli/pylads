@@ -23,17 +23,20 @@ how many otherwise type just press 'Enter':\n''')
     exponent = len(new_squares) - 1
     new_char = None
     for i in new_squares:
-        print(i, int(i))
+        squares_amount = int(i)
+        print(i, squares_amount)
         if ((i != "0") and (i != "1") and (i != "2") and (i != "3") and (i != "4")
                 and (i != "5") and (i != "6") and (i != "7") and (i != "8") and (i != "9")):
             print('Error: Invalid input.')
             n, added_text = outer_squares(n)
             break
-        n += 2 * int(i) * 10**exponent
+        n += 2 * squares_amount * 10**exponent
+        for k in range(squares_amount):
+            for j in range(4*((n-1)*10**exponent-2*k)):
+                new_char = random_char(new_char)
+                added_text += new_char
+            print(len(added_text))
         exponent -= 1
-        for j in range(4*(n-1)):
-            new_char = random_char(new_char)
-            added_text += new_char
     return n, added_text
 
 
@@ -158,7 +161,7 @@ def main():
     text = input('Insert the text you want to cipher:\n')
     n, text_modulo = round_text_length(len(text))
     if  text_modulo != 0:
-    text = rounded_text(text, text_modulo)
+        text = rounded_text(text, text_modulo)
     n, added_text = outer_squares(n)
     starting_corner = starting_corner_position(starting_corner, n-1)
     text = added_text + text
