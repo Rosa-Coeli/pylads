@@ -14,6 +14,7 @@ def round_text_length(text_length):
 
 
 def outer_squares(n):
+    former_n = n
     new_squares = input('''If you wish additional squares of random letters around your
 text to further confuse anyone who might try to solve your cipher please tell me
 how many otherwise type just press 'Enter':\n''')
@@ -23,16 +24,16 @@ how many otherwise type just press 'Enter':\n''')
     exponent = len(new_squares) - 1
     new_char = None
     for i in new_squares:
-        squares_amount = int(i)
-        print(i, squares_amount)
         if ((i != "0") and (i != "1") and (i != "2") and (i != "3") and (i != "4")
                 and (i != "5") and (i != "6") and (i != "7") and (i != "8") and (i != "9")):
             print('Error: Invalid input.')
-            n, added_text = outer_squares(n)
+            n, added_text = outer_squares(former_n)
             break
-        n += 2 * squares_amount * 10**exponent
+        squares_amount = int(i)*10**exponent
+        print(i, squares_amount)
+        n += 2 * squares_amount
         for k in range(squares_amount):
-            for j in range(4*((n-1)*10**exponent-2*k)):
+            for j in range(4*(n-1-2*k)):
                 new_char = random_char(new_char)
                 added_text += new_char
             print(len(added_text))
