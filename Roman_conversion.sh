@@ -12,7 +12,7 @@ do
 		input=${input:3}
 		arabic=$(py $dir_name/05/Roman_numerals_to_Arabic.py ${input^^})
 		roman=$(py $dir_name/05/Arabic_numerals_to_Roman.py $arabic)
-		echo Normalized roman numeral is probably $roman which equals $arabic.
+		echo Normalized roman numeral is probably $roman which equals to $arabic.
 	elif [[ $input =~ ^[IVXLCDMivxlcdm]+$ ]]; then
 		py $dir_name/05/Roman_numerals_to_Arabic.py ${input^^}
 	elif [[ $input =~ exit|quit ]]; then
