@@ -9,7 +9,5 @@ for i in *.[Jj][Pp][Gg];
 do
 	py guess_the_picture.py $i $fraction
 	read a
-	echo $a
 	read a
-	echo $a
 done
