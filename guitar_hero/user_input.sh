@@ -31,7 +31,7 @@ do
 			do
 				all_strings="$all_strings$j,${strings[$j]};"
 			done
-			echo $name:$all_strings >> $(dirname $(realpath $0))/akordy.txt
+			echo $name:${all_strings%\;} >> $(dirname $(realpath $0))/chords.txt
 			break
 			;;
 		n)
