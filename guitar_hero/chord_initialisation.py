@@ -1,5 +1,5 @@
 def fret_symbol():
-    return '\n\t\t  ______\n'
+    return '\n\t\t   ___________\n'
 
 
 def prepare_fret(fret):
