@@ -1,3 +1,10 @@
+import os
+import sys
+
+
+temp_dir = './data/temp/'
+
+
 def fret_symbol():
     return '\n\t\t   ___________\n'
 
@@ -16,28 +23,30 @@ def prepare_fret(fret):
 
 def write_chords(chord_playdict):
     for chord_name, chord in chord_playdict.items():
-        with open('.'+ chord_name + '.txt', 'a+', encoding='utf-8') as chord_file:
-            chord_file.write('\t' + chord_name + '\t' + chord[0][0] + prepare_fret(chord[0][1]))
-            for fret in chord[1:-1]:
-                chord_file.write('\t\t ' + prepare_fret(fret[1]))
-            chord_file.write('\t\t' + chord[-1][0] + prepare_fret(chord[-1][1]))
+        chord_path = temp_dir + '.'+ chord_name + '.txt'
+        if not os.path.exists(chord_path):
+            with open(chord_path, 'a+', encoding='utf-8') as chord_file:
+                chord_file.write('\t' + chord_name + '\t' + chord[0][0] + prepare_fret(chord[0][1]))
+                for fret in chord[1:-1]:
+                    chord_file.write('\t\t ' + prepare_fret(fret[1]))
+                chord_file.write('\t\t' + chord[-1][0] + prepare_fret(chord[-1][1]))
 
 
 def write_missing_chords(missing_chords):
-    with open('.missing_chords.txt', 'a+', encoding='utf-8') as missing_file:
+    with open(temp_dir + '.missing_chords.txt', 'a+', encoding='utf-8') as missing_file:
         for chord in missing_chords:
             missing_file.write(chord + '\n')
 
 
 def read_chords():
     chord_playlist = []  # Loads list of chords to be played from a file.
-    with open('.playlist.txt', 'r', encoding='utf-8') as chords:
+    with open(temp_dir + '.playlist.txt', 'r', encoding='utf-8') as chords:
         for chord in chords.readlines():
             chord = chord.strip()
             if chord not in chord_playlist:
                 chord_playlist.append(chord)
     chord_playdict = {}  # Loads dictionary of all saved chords.
-    with open('chords.txt', 'r', encoding='utf-8') as chords:
+    with open('./data/chords.txt', 'r', encoding='utf-8') as chords:
         for chord in chords.readlines():
             chord = chord.strip()
             chord_name, chord = chord.rsplit(sep=':', maxsplit=1)
@@ -55,9 +64,11 @@ def main():
     write_chords(chord_playdict)
     if missing_chords:
         write_missing_chords(missing_chords)
-        return 1
+        #print(1, file=sys.stderr)
+        print(1)
     else:
-        return 0
+        #print(0, file=sys.stderr)
+        print(0)
 
 
 main()

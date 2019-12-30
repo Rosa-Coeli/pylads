@@ -3,7 +3,6 @@
 
 dir_path=$(dirname $(realpath $0))
 
-
 echo -n Write how many seconds of time you want inbetween chords: 
 read wait_time
 
@@ -29,6 +28,7 @@ commands () {
 
 clear
 sleep 3
+commands
 
 while :
 do
@@ -44,7 +44,10 @@ do
 			./user_input.sh
 			;;
 		random)
+			ret_value=$(py chord_initialisation.py)
+			read
 			./random_play.sh
 			;;
 	esac
 done
+echo $ret_value

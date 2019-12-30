@@ -12,8 +12,7 @@ gap () {
 
 wait_time=3
 
-clear
-sleep 3
+#clear
 
 gap
 
@@ -21,7 +20,7 @@ playlist=(G C)
 num_playlist=${#playlist[*]}
 while [[ $random_play_input != exit ]]
 do
-	cat .${playlist[$((RANDOM%num_playlist))]}.txt
+	cat ./data/temp/.${playlist[$((RANDOM%num_playlist))]}.txt
 	gap
 done
 
