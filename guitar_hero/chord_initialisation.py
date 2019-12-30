@@ -16,27 +16,27 @@ def prepare_fret(fret):
 
 def write_chords(chord_playdict):
     for chord_name, chord in chord_playdict.items():
-        with open(chord_name + '.txt', 'a+', encoding='utf-8') as chord_file:
+        with open('.'+ chord_name + '.txt', 'a+', encoding='utf-8') as chord_file:
             chord_file.write('\t' + chord_name + '\t' + chord[0][0] + prepare_fret(chord[0][1]))
             for fret in chord[1:-1]:
-                chord_file.write('\t\t' + prepare_fret(fret[1]))
-            chord_file.write('\t' + chord_name + '\t' + chord[-1][0] + prepare_fret(chord[-1][1]))
+                chord_file.write('\t\t ' + prepare_fret(fret[1]))
+            chord_file.write('\t\t' + chord[-1][0] + prepare_fret(chord[-1][1]))
 
 
 def write_missing_chords(missing_chords):
-    with open(missing_chords.txt, 'a+', encoding='utf-8') as missing_file:
+    with open('.missing_chords.txt', 'a+', encoding='utf-8') as missing_file:
         for chord in missing_chords:
-            missing_file.write(chord)
+            missing_file.write(chord + '\n')
 
 
 def read_chords():
-    chord_playlist = []  # Loads list of chords to be played form a file.
-    with open('playlist.txt', 'r', encoding='utf-8') as chords:
+    chord_playlist = []  # Loads list of chords to be played from a file.
+    with open('.playlist.txt', 'r', encoding='utf-8') as chords:
         for chord in chords.readlines():
             chord = chord.strip()
             if chord not in chord_playlist:
                 chord_playlist.append(chord)
-    chord_playdict = {}
+    chord_playdict = {}  # Loads dictionary of all saved chords.
     with open('chords.txt', 'r', encoding='utf-8') as chords:
         for chord in chords.readlines():
             chord = chord.strip()

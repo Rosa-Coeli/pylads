@@ -22,7 +22,7 @@ commands () {
 	echo -\'exit\', \'quit\' or \'x\' to exit.
 	echo -\'help\' to show commands.
 	echo -\'insert\' to insert new chords.
-	echo -\'play\' to start playing!
+	echo -\'random\' to start playing random sequence of chords!
 }
 
 
@@ -32,8 +32,8 @@ sleep 3
 
 while :
 do
-	read input
-	case $input in 
+	read menu_input
+	case $menu_input in 
 		exit | quit | x)
 			break
 			;;
@@ -43,7 +43,8 @@ do
 		insert)
 			./user_input.sh
 			;;
-		play)
+		random)
+			./random_play.sh
 			;;
 	esac
 done
