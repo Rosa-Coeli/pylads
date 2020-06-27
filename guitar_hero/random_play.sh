@@ -16,7 +16,8 @@ wait_time=3
 
 gap
 
-playlist=(G C)
+
+playlist=(G C A D F E Ami Emi Dmi Cmi Gmi G\# G\#mi Amaj7 H6/9 C\#maj9 A\#mi9 Edim7 G13 D\#sus)
 num_playlist=${#playlist[*]}
 while [[ $random_play_input != exit ]]
 do
